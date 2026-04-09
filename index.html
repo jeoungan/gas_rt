@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>10초 챌린지</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bg: #0f172a;
@@ -16,7 +18,7 @@
       --neon-red: #ef4444;
       --glass-border: rgba(255, 255, 255, 0.1);
     }
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -24,7 +26,7 @@
       user-select: none;
       -webkit-user-select: none;
     }
-    
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
@@ -37,7 +39,7 @@
       overflow: hidden;
       background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
     }
-    
+
     .container {
       width: 90%;
       max-width: 400px;
@@ -69,8 +71,8 @@
       width: 100%;
       padding: 1rem;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.2);
       color: white;
       font-size: 1.1rem;
       text-align: center;
@@ -78,14 +80,14 @@
       transition: border-color 0.3s, box-shadow 0.3s;
       font-family: 'Inter', sans-serif;
     }
-    
+
     input:focus {
       border-color: var(--neon-blue);
       box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
     }
-    
+
     input::placeholder {
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.4);
     }
 
     .btn {
@@ -101,16 +103,16 @@
       transition: transform 0.1s, box-shadow 0.3s, background 0.3s;
       letter-spacing: 1px;
     }
-    
+
     .btn:active {
       transform: scale(0.96);
     }
-    
+
     .btn-primary {
       background: linear-gradient(135deg, #38bdf8, #2563eb);
       box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
     }
-    
+
     .btn-primary:hover {
       box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
     }
@@ -133,7 +135,7 @@
       font-size: 5rem;
       font-weight: 700;
       color: var(--text);
-      text-shadow: 0 0 20px rgba(255,255,255,0.3);
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
       font-variant-numeric: tabular-nums;
       margin: 1rem 0;
     }
@@ -144,7 +146,7 @@
       width: 100%;
       animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .screen.active {
       display: flex;
       flex-direction: column;
@@ -153,36 +155,55 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .result-text {
       font-size: 1.5rem;
       font-weight: 600;
     }
-    
+
     .diff-text {
       font-size: 2.2rem;
       font-weight: 800;
       font-family: 'Outfit', sans-serif;
     }
 
-    .diff-perfect { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
-    .diff-good { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
-    .diff-bad { color: var(--neon-red); text-shadow: 0 0 15px var(--neon-red); }
+    .diff-perfect {
+      color: var(--neon-blue);
+      text-shadow: 0 0 15px var(--neon-blue);
+    }
 
+    .diff-good {
+      color: var(--neon-green);
+      text-shadow: 0 0 15px var(--neon-green);
+    }
+
+    .diff-bad {
+      color: var(--neon-red);
+      text-shadow: 0 0 15px var(--neon-red);
+    }
   </style>
 </head>
+
 <body>
-  
+
   <div class="container">
-    
+
     <!-- Login Screen -->
     <div id="screen-login" class="screen active">
       <h1>10초 챌린지</h1>
       <p style="color: #94a3b8; font-size: 0.95rem;">타이머가 정확히 10.000초가 될 때<br>버튼을 멈추세요!</p>
-      <input type="text" id="participant-id" placeholder="참가자 ID 입력 (예: P01)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <input type="text" id="participant-id" placeholder="참가자 ID 입력 (예: P01)" autocomplete="off" autocorrect="off"
+        autocapitalize="off" spellcheck="false">
       <button class="btn btn-primary" onclick="startChallenge()">실험 시작</button>
     </div>
 
@@ -197,10 +218,11 @@
       <h2 style="font-family: 'Outfit', sans-serif;">RESULT</h2>
       <div class="result-text">기록: <span id="final-time">--</span>초</div>
       <div id="diff-display" class="diff-text"></div>
-      <p id="status-msg" style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; font-weight: 600;">데이터 저장 중...</p>
+      <p id="status-msg" style="color: #94a3b8; font-size: 0.95rem; margin-top: 0.5rem; font-weight: 600;">데이터 저장 중...
+      </p>
       <button class="btn btn-primary" onclick="resetGame()" style="margin-top: 1rem;">다시 하기</button>
     </div>
-    
+
   </div>
 
   <script>
@@ -209,7 +231,7 @@
     let startTime = 0;
     let timerInterval;
     const TARGET_TIME = 10.000;
-    
+
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -238,7 +260,7 @@
 
     function handleAction() {
       const btn = document.getElementById('action-btn');
-      
+
       if (state === "idle") {
         // Start the timer
         state = "running";
@@ -250,13 +272,13 @@
         // Stop the timer
         state = "stopped";
         cancelAnimationFrame(timerInterval);
-        
+
         const endTime = performance.now();
         const elapsed = (endTime - startTime) / 1000;
-        
+
         // Show exact stopped time immediately
         document.getElementById('timer').innerText = elapsed.toFixed(3);
-        
+
         processResult(elapsed);
       }
     }
@@ -265,18 +287,18 @@
       // 0.6초간 내가 멈춘 시간을 볼 수 있게 한 후 결과화면으로 전환
       setTimeout(() => {
         showScreen('screen-result');
-        
+
         const diff = finalTime - TARGET_TIME;
         const diffAbs = Math.abs(diff);
-        
+
         document.getElementById('final-time').innerText = finalTime.toFixed(3);
-        
+
         const diffDisplay = document.getElementById('diff-display');
         let sign = diff > 0 ? "+" : (diff < 0 ? "-" : "");
         // Avoid "-0.000" if diff is extremely small but negative
         const formatDiff = (diffAbs === 0) ? "0.000" : diffAbs.toFixed(3);
         diffDisplay.innerText = `${sign}${formatDiff}초`;
-        
+
         diffDisplay.className = "diff-text";
         if (diffAbs <= 0.1) {
           diffDisplay.classList.add("diff-perfect");
@@ -288,17 +310,17 @@
 
         // Send to GAS
         const now = new Date();
-        const timestamp = now.getFullYear() + "-" + 
-                  ('0' + (now.getMonth()+1)).slice(-2) + "-" + 
-                  ('0' + now.getDate()).slice(-2) + " " + 
-                  ('0' + now.getHours()).slice(-2) + ":" + 
-                  ('0' + now.getMinutes()).slice(-2) + ":" + 
-                  ('0' + now.getSeconds()).slice(-2);
-                  
+        const timestamp = now.getFullYear() + "-" +
+          ('0' + (now.getMonth() + 1)).slice(-2) + "-" +
+          ('0' + now.getDate()).slice(-2) + " " +
+          ('0' + now.getHours()).slice(-2) + ":" +
+          ('0' + now.getMinutes()).slice(-2) + ":" +
+          ('0' + now.getSeconds()).slice(-2);
+
         const data = [pId, finalTime.toFixed(3), diff.toFixed(3), timestamp];
-        
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbzQdRK_dQHDJrGI5osHXHuzIP02jq5TkYksmJ8CDi_biuqlE9a9dIGLzCpPFXChB7Gi/exec";
-        
+
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbyj42vZcrlBfKy5bB_2cAZknYHYkTPEFun33i0dAKv1dDdsdUjJ_-HJocNOZ4Ph7doM/exec";
+
         fetch(GAS_URL, {
           method: 'POST',
           headers: {
@@ -311,16 +333,16 @@
             'timestamp': timestamp
           })
         })
-        .then(response => {
-          document.getElementById('status-msg').innerText = "결과 저장 완료!";
-          document.getElementById('status-msg').style.color = "var(--neon-green)";
-        })
-        .catch(error => {
-          // No error coding requirement: simply show success or a fallback text gently
-          document.getElementById('status-msg').innerText = "저장 처리됨 (에러 무시)";
-          document.getElementById('status-msg').style.color = "var(--neon-green)";
-        });
-      }, 600); 
+          .then(response => {
+            document.getElementById('status-msg').innerText = "결과 저장 완료!";
+            document.getElementById('status-msg').style.color = "var(--neon-green)";
+          })
+          .catch(error => {
+            // No error coding requirement: simply show success or a fallback text gently
+            document.getElementById('status-msg').innerText = "저장 처리됨 (에러 무시)";
+            document.getElementById('status-msg').style.color = "var(--neon-green)";
+          });
+      }, 600);
     }
 
     function resetGame() {
@@ -331,9 +353,10 @@
       btn.classList.remove("stop");
       document.getElementById('status-msg').innerText = "데이터 저장 중...";
       document.getElementById('status-msg').style.color = "#94a3b8";
-      
+
       showScreen('screen-game');
     }
   </script>
 </body>
+
 </html>
